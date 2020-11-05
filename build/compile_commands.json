@@ -1,0 +1,17 @@
+[
+{
+  "directory": "/opt/c/links_treat/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-9    -g   -std=gnu++17 -o CMakeFiles/links_treat.dir/src/main.cpp.o -c /opt/c/links_treat/src/main.cpp",
+  "file": "/opt/c/links_treat/src/main.cpp"
+},
+{
+  "directory": "/opt/c/links_treat/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-9    -g   -std=gnu++17 -o CMakeFiles/links_treat.dir/src/files_tree/file_treat.cpp.o -c /opt/c/links_treat/src/files_tree/file_treat.cpp",
+  "file": "/opt/c/links_treat/src/files_tree/file_treat.cpp"
+},
+{
+  "directory": "/opt/c/links_treat/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-9    -g   -std=gnu++17 -o CMakeFiles/links_treat.dir/src/files_tree/treat_directory.cpp.o -c /opt/c/links_treat/src/files_tree/treat_directory.cpp",
+  "file": "/opt/c/links_treat/src/files_tree/treat_directory.cpp"
+}
+]
