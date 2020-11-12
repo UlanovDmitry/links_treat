@@ -18,30 +18,35 @@ protected:
     IFileWalker* _prnt; // родитель
 public:
     IFileWalker(IFileWalker* prnt = nullptr, string path = "");
-    string filename();
-    string indent();
-    int get_l(); 
     virtual ~IFileWalker(){}
+    string filename() const;
+    string indent() const;
+    int get_l() const;
+    virtual bool is_dir() const = 0;
     virtual void treat() = 0; 
+    virtual vector<IFileWalker*>& files() = 0;
 };
 
 // Анализатор файлов
 class FileWalker : public IFileWalker {
-
 public:
-    virtual void treat(); 
     FileWalker(IFileWalker* prnt = nullptr, string path = ""):IFileWalker(prnt,path){}
     virtual ~FileWalker(){}
-}; 
+    virtual bool is_dir() const;
+    virtual void treat();
+    virtual vector<IFileWalker*>& files();
+};
 
 // Анализатор каталогов
 class DirWalker : public IFileWalker { 
 protected:
-    vector<IFileWalker*> files;
+    vector<IFileWalker*> _files;
 public:
-    virtual void treat(); 
     DirWalker(IFileWalker* prnt = nullptr, string path = "");
-    virtual ~DirWalker(){} 
+    virtual ~DirWalker(){}
+    virtual bool is_dir() const;
+    virtual void treat();
+    virtual vector<IFileWalker*>& files();
 };
 
 // Построитель объектов-анализаторов
@@ -49,8 +54,8 @@ public:
 class WalkerBuilder { 
 private:
     WalkerBuilder(){}
-    ~WalkerBuilder(){}
     WalkerBuilder(WalkerBuilder& oter) = delete;
+    ~WalkerBuilder(){}
     void operator=(const WalkerBuilder& ) = delete; 
 public: 
     static WalkerBuilder& get_instance(){

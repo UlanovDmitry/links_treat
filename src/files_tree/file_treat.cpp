@@ -33,15 +33,15 @@ IFileWalker::IFileWalker(IFileWalker* prnt, string path):_path(path),_prnt(prnt)
         _l = 0;
     }
 }
-string IFileWalker::filename(){
+string IFileWalker::filename() const{
     return _filename;
 } 
-string IFileWalker::indent(){
+string IFileWalker::indent() const{
     string ind = "";
     for(int i=0; i<_l; i++) ind+="\t"; 
     return ind;
 } 
-int IFileWalker::get_l(){
+int IFileWalker::get_l() const{
     return _l;
 } 
 
@@ -49,8 +49,15 @@ int IFileWalker::get_l(){
 // FileWalker
 //
 
+bool FileWalker::is_dir() const {
+    return false;
+}
 void FileWalker::treat(){
     std::cout<<indent()<<"- "<<_filename<<std::endl;
+}
+vector<IFileWalker*>& FileWalker::files(){
+    vector<IFileWalker*> *f = new vector<IFileWalker*>{};
+    return *f;
 }
 
 //
@@ -63,18 +70,24 @@ DirWalker::DirWalker(IFileWalker* prnt, string path)
         WalkerBuilder& wb = WalkerBuilder::get_instance();
         IFileWalker* f = wb.build_walker(this,e.path().string()); 
         if (f != nullptr){
-            this->files.push_back(f);
+            this->_files.push_back(f);
         }
     } 
+}
+bool DirWalker::is_dir() const {
+    return true;
 }
 void DirWalker::treat(){
     if (this->_path != ""){
         std::cout<<indent()<<"[] "<<_filename<<std::endl;
-        for (const auto& e: this->files){
+        for (const auto& e: this->_files){
             e->treat();
         }
     }
 } 
+vector<IFileWalker*>& DirWalker::files(){
+    return _files;
+}
 
 //
 // WalkerBuilder
