@@ -1,6 +1,7 @@
 #include <iostream>
-#include "files_tree/tree.h"
-#include "files_tree/workers.h"
+#include "tree.h"
+#include "services.h"
+#include "workers.h"
 
 
 int main(int argc, char* argv[]){

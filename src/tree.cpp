@@ -4,12 +4,13 @@
 #include <string>
 #include <filesystem>
 
-#include "workers.h"
+#include "services.h"
 
 namespace file_treat{
 
 using std::string;
 namespace fs = std::filesystem;
+
 
 // tree_node
 tree_node::tree_node(tree_node* prnt, string path):_path(path),_prnt(prnt) {
@@ -26,12 +27,14 @@ tree_node::tree_node(tree_node* prnt, string path):_path(path),_prnt(prnt) {
     for(int i=0; i<_l; i++) _indent+="\t";
 }
 
+
 // file_node
 // TODO: надо как-то по другому вернуть пустой массив
 vector<tree_node*>& file_node::files(){
     vector<tree_node*> *f = new vector<tree_node*>{};
     return *f;
 }
+
 
 // dir_node
 dir_node::dir_node(tree_node* prnt, string path)

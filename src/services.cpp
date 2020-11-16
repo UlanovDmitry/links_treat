@@ -1,5 +1,6 @@
-#include "workers.h"
+#include "services.h"
 #include "tree.h"
+
 
 #include <string>
 #include <filesystem>
@@ -9,6 +10,7 @@ namespace file_treat {
 
 using std::string;
 namespace fs = std::filesystem;
+
 
 // tree_builder
 tree_node* tree_builder::build_node(tree_node* prnt, string path){
@@ -23,15 +25,21 @@ tree_node* tree_builder::build_node(tree_node* prnt, string path){
     }
 }
 
+
 // file_walker
-void file_walker::visit(tree_node& f){
-    if(f.is_dir()){
-        std::cout<<f.indent()<<"[+] "<<f.filename()<<std::endl;
-        for(auto f: f.files()){
+file_walker::file_walker(){
+    worker* w = new worker();
+    _wrk = new worker_logger(w);
+}
+file_walker::~file_walker(){
+    delete _wrk;
+}
+void file_walker::visit(tree_node& n){
+    _wrk->work(n);
+    if(n.is_dir()){
+        for(auto f: n.files()){
             visit(*f);
         }
-    } else {
-        std::cout<<f.indent()<<"+ "<<f.filename()<<std::endl;
     }
 }
 

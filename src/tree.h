@@ -9,7 +9,8 @@ namespace file_treat {
 using std::string;
 using std::vector;
 
-// Интерфейс узла дерева (паттерн Компоновщик)
+
+// Узел дерева (паттерн Компоновщик)
 class tree_node {
 protected:
     string _path;       // полный путь к файлу
@@ -27,6 +28,7 @@ public:
     virtual vector<tree_node*>& files() = 0;
 };
 
+
 // Узел-файл
 class file_node: public tree_node {
 public:
@@ -35,6 +37,7 @@ public:
     virtual bool is_dir() const {return false; };
     virtual vector<tree_node*>& files();
 };
+
 
 // Узел-каталог
 class dir_node: public tree_node {

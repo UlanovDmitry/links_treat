@@ -9,14 +9,16 @@ project(${PROJECT} VERSION 1.2.3.4 LANGUAGES C CXX)
 
 
 set(HEADERS 
-    src/files_tree/tree.h
-    src/files_tree/workers.h
+    src/services.h
+    src/tree.h
+    src/workers.h
     )
 
 set(SOURCES
     src/main.cpp
-    src/files_tree/tree.cpp
-    src/files_tree/workers.cpp
+    src/tree.cpp
+    src/services.cpp
+    src/workers.cpp
     )
 
 

@@ -1,9 +1,11 @@
-#ifndef FILE_TREAT_WORKERS_H
-#define FILE_TREAT_WORKERS_H
+#ifndef FILE_TREAT_SERVICES_H
+#define FILE_TREAT_SERVICES_H
 
 #include "tree.h"
+#include "workers.h"
 
 namespace file_treat {
+
 
 // Построитель дерева (паттерны Строитель, Одиночка)
 class tree_builder {
@@ -20,22 +22,24 @@ public:
     tree_node* build_node(tree_node* prnt, string path);
 };
 
+
 // Обходчик дерева (паттерны Посетитель, Одиночка)
 class file_walker {
 private:
-    file_walker(){}
+    worker* _wrk;
+    file_walker();
     file_walker(file_walker& oter) = delete;
-    ~file_walker(){}
+    ~file_walker();
     void operator=(const file_walker& ) = delete;
 public:
     static file_walker& get_instance(){
         static file_walker _instance;
         return _instance;
     }
-    void visit(tree_node& f);
+    void visit(tree_node& n);
 };
 
 
 } // namespace file_treat
 
-#endif // WORKERS_H
+#endif // FILE_TREAT_SERVICES_H
