@@ -42,6 +42,14 @@ public:
 };
 
 
+// Формирование .md файла
+class worker_md_maker: public worker_wrap{
+public:
+    worker_md_maker(worker* w): worker_wrap(w){}
+    virtual void work(tree_node& n);
+};
+
+
 } // namespace file_treat
 
 #endif // FILE_TREAT_WORKERS_H

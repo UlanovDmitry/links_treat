@@ -17,6 +17,7 @@ tree_node::tree_node(tree_node* prnt, string path):_path(path),_prnt(prnt) {
     fs::path p(path);
     if(fs::exists(p)){
         this->_filename = p.filename().string();
+        this->_ext = p.extension().string();
     }
     if(prnt != nullptr){
         _l = prnt->get_l()+1;

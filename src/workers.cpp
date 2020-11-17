@@ -21,19 +21,39 @@ void worker_logger::work(tree_node& n){
     worker_wrap::work(n);
 }
 
+
 // worker_ini_parser
 void worker_ini_parser::work(tree_node& n){
-
-    using boost::property_tree::ptree;
-    ptree pt;
-    read_ini(n.path(), pt);
-    for (auto& section : pt){
-//        std::cout << '[' << section.first << "]\n";
-        for (auto& key : section.second){
-            std::cout << key.first << "=" << key.second.get_value<std::string>() << "\n";
+    if ((n.extension() == ".url") || (n.extension() == ".URL")){
+        using boost::property_tree::ptree;
+        ptree pt;
+        read_ini(n.path(), pt);
+        for (auto& section : pt){
+    //        std::cout << '[' << section.first << "]\n";
+            for (auto& key : section.second){
+//                std::cout << key.first << "=" << key.second.get_value<std::string>() << "\n";
+                n.set_url(key.second.get_value<std::string>());
+                break;
+            }
             break;
         }
-        break;
+    }
+    worker_wrap::work(n);
+}
+
+
+// worker_md_maker
+void worker_md_maker::work(tree_node& n){
+    if (n.is_dir()){
+        string idt = "";
+        for(int i=0; i<n.get_l(); i++){
+            idt += "#";
+        }
+        std::cout<<idt<<" "<<n.filename()<<std::endl;
+    } else if (n.url().length()>0) {
+        std::cout<<"["<<n.filename()<<"]"
+                <<"("<<n.url()<<")"
+               <<std::endl;
     }
     worker_wrap::work(n);
 }

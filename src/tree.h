@@ -15,16 +15,21 @@ class tree_node {
 protected:
     string _path;       // полный путь к файлу
     string _filename;   // имя файла
+    string _ext;        // расширение
     int _l;             // уровень отступа
     string _indent;		// отступ
     tree_node* _prnt;   // родитель
+    string _url;        // ссылка (если это файл ссылки)
 public:
     tree_node(tree_node* prnt = nullptr, string path = "");
     virtual ~tree_node(){}
     string path() const { return _path; }
     string filename() const { return _filename; }
+    string extension() const { return _ext; }
     string indent() const { return _indent; }
     int get_l() const { return _l; }
+    void set_url(string url){ _url=url; }
+    string url() const { return _url; }
     virtual bool is_dir() const = 0;
     virtual vector<tree_node*>& files() = 0;
 };
