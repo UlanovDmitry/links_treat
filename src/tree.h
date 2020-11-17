@@ -21,9 +21,10 @@ protected:
 public:
     tree_node(tree_node* prnt = nullptr, string path = "");
     virtual ~tree_node(){}
-    string filename() const { return _filename; };
-    string indent() const { return _indent; };
-    int get_l() const { return _l; };
+    string path() const { return _path; }
+    string filename() const { return _filename; }
+    string indent() const { return _indent; }
+    int get_l() const { return _l; }
     virtual bool is_dir() const = 0;
     virtual vector<tree_node*>& files() = 0;
 };

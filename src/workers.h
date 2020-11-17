@@ -34,6 +34,14 @@ public:
 };
 
 
+// Разбор ini-файла
+class worker_ini_parser: public worker_wrap{
+public:
+    worker_ini_parser(worker* w): worker_wrap(w){}
+    virtual void work(tree_node& n);
+};
+
+
 } // namespace file_treat
 
 #endif // FILE_TREAT_WORKERS_H
