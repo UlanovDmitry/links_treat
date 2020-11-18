@@ -31,6 +31,7 @@ public:
     void set_url(string url){ _url=url; }
     string url() const { return _url; }
     virtual bool is_dir() const = 0;
+    virtual bool is_url() const {return _ext == ".url" || _ext == ".URL";}
     virtual vector<tree_node*>& files() = 0;
 };
 

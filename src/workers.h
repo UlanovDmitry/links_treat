@@ -2,10 +2,13 @@
 #define FILE_TREAT_WORKERS_H
 
 #include <string>
+#include <fstream>
 #include "tree.h"
 
 namespace file_treat {
 
+using std::string;
+using std::ofstream;
 
 // Исполнитель действий над узлом
 // (паттерн Декоратор)
@@ -45,16 +48,21 @@ public:
 
 // Формирование .md файла
 class worker_md_maker: public worker_wrap{
+    ofstream _f;
 public:
-    worker_md_maker(worker* w): worker_wrap(w){}
+    worker_md_maker(worker* w, string path);
+    virtual ~worker_md_maker();
     virtual void work(tree_node& n);
 };
 
 
 // Сбор не-url файлов
 class worker_res_accum: public worker_wrap{
+    ofstream _f;
+    string _path;
 public:
-    worker_res_accum(worker* w, std::string path);
+    worker_res_accum(worker* w, string path);
+    virtual ~worker_res_accum();
     virtual void work(tree_node& n);
 };
 

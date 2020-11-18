@@ -34,8 +34,9 @@ file_walker::~file_walker(){
     delete _wrk;
 }
 file_walker& file_walker::configure(string path){
-    _wrk = new worker_md_maker(_wrk);
     _wrk = new worker_ini_parser(_wrk);
+    _wrk = new worker_logger(_wrk);
+    _wrk = new worker_md_maker(_wrk,path);
     _wrk = new worker_res_accum(_wrk,path);
     return get_instance();
 }
