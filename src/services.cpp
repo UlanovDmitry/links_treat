@@ -28,12 +28,16 @@ tree_node* tree_builder::build_node(tree_node* prnt, string path){
 
 // file_walker
 file_walker::file_walker(){
-    worker* w = new worker();
-    w = new worker_md_maker(w);
-    _wrk = new worker_ini_parser(w);
+    _wrk = new worker();
 }
 file_walker::~file_walker(){
     delete _wrk;
+}
+file_walker& file_walker::configure(string path){
+    _wrk = new worker_md_maker(_wrk);
+    _wrk = new worker_ini_parser(_wrk);
+    _wrk = new worker_res_accum(_wrk,path);
+    return get_instance();
 }
 void file_walker::visit(tree_node& n){
     _wrk->work(n);

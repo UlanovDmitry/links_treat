@@ -1,6 +1,7 @@
 #ifndef FILE_TREAT_WORKERS_H
 #define FILE_TREAT_WORKERS_H
 
+#include <string>
 #include "tree.h"
 
 namespace file_treat {
@@ -48,6 +49,15 @@ public:
     worker_md_maker(worker* w): worker_wrap(w){}
     virtual void work(tree_node& n);
 };
+
+
+// Сбор не-url файлов
+class worker_res_accum: public worker_wrap{
+public:
+    worker_res_accum(worker* w, std::string path);
+    virtual void work(tree_node& n);
+};
+
 
 
 } // namespace file_treat

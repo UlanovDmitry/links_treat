@@ -1,6 +1,7 @@
 #ifndef FILE_TREAT_SERVICES_H
 #define FILE_TREAT_SERVICES_H
 
+#include <string>
 #include "tree.h"
 #include "workers.h"
 
@@ -36,6 +37,7 @@ public:
         static file_walker _instance;
         return _instance;
     }
+    file_walker& configure(std::string path);
     void visit(tree_node& n);
 };
 

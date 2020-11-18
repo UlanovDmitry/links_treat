@@ -15,7 +15,9 @@ int main(int argc, char* argv[]){
 
         tree_node *r = tree_builder::get_instance()
                 .build_node(nullptr,path);
-        file_walker::get_instance().visit(*r);
+        file_walker::get_instance()
+                .configure(path)
+                .visit(*r);
         delete r;
 
     }

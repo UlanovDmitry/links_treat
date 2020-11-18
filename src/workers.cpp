@@ -59,4 +59,19 @@ void worker_md_maker::work(tree_node& n){
 }
 
 
+// worker_res_accum
+worker_res_accum::worker_res_accum(worker* w, string path): worker_wrap(w){
+    // определяемся с путём к папке
+    // создаём папку, если не было
+    // открываем на запись файл логов
+}
+void worker_res_accum::work(tree_node& n){
+    if (!n.is_dir() &&
+        !(n.extension() == ".url" || n.extension() == ".URL")){
+
+    }
+    worker_wrap::work(n);
+}
+
+
 } // namespace file_treat
