@@ -16,7 +16,7 @@ namespace fs = std::filesystem;
 tree_node::tree_node(tree_node* prnt, string path):_path(path),_prnt(prnt) {
     fs::path p(path);
     if(fs::exists(p)){
-        this->_filename = p.filename().string();
+        this->_filename = p.stem().string();
         this->_ext = p.extension().string();
     }
     if(prnt != nullptr){
