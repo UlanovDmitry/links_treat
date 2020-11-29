@@ -82,7 +82,7 @@ void worker_res_accum::work(tree_node& n){
     worker_wrap::work(n);
     if (!n.is_dir() && !n.is_url()){
         _f<<n.path()<<std::endl;
-        path p = path(_path) / n.filename();  // копируем файл в специальную папку
+        path p = path(_path) / path(n.path()).filename();  // копируем файл в специальную папку
         fs::copy_file(path(n.path()),p);
     }
 }
